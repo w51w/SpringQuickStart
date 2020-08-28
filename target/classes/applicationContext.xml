@@ -4,8 +4,11 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<bean id="tv" class="polymorphism.SamsungTV">
-		<constructor-arg ref="apple"></constructor-arg>
+		<!-- setter 인젝션 -->
+		<property name="speaker" ref="apple"></property>
 	</bean>
 	
+	<bean id="sony" class="polymorphism.SonySpeaker"></bean>
 	<bean id="apple" class="polymorphism.AppleSpeaker"></bean>
 </beans>
+<!-- p네임스페이스는 좀 더 효율적으로 의존성 주입을 처리할 수 있다 p84 - p85-->

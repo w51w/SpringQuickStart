@@ -7,10 +7,13 @@ public class SamsungTV implements TV {
 	public SamsungTV() {
 		System.out.println("[객체 생성]SamsungTV(1) ");
 	}
-	public SamsungTV(Speaker speaker) {
-		System.out.println("[객체 생성]SamsungTV(2) ");
+	
+	// set + name속성값(첫글자는 대문자)
+	public void setSpeaker(Speaker speaker) {
+		System.out.println("setSpeaker() 호출");
 		this.speaker = speaker;
 	}
+
 	@Override
 	public void powerOn() {
 		System.out.println("삼성TV 전원 켬");
