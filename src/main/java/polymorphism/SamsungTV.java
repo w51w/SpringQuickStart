@@ -1,6 +1,9 @@
 package polymorphism;
 
 public class SamsungTV implements TV {
+	public SamsungTV() {
+		System.out.println("[按眉 积己]SamsungTV ");
+	}
 	@Override
 	public void powerOn() {
 		System.out.println("伙己TV 傈盔 脑");

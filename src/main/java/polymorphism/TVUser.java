@@ -1,19 +1,25 @@
 package polymorphism;
 
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
+
 public class TVUser {
 
 	public static void main(String[] args) {
-		BeanFactory factory = new BeanFactory();
-		TV tv = (TV)factory.getBean(args[0]);
+		//1. Spring 컨테이너를 구동한다.
+		// 구동 이후 Bean에 등록된 객체가 생성된다.
+		AbstractApplicationContext factory = 
+				new GenericXmlApplicationContext("applicationContext.xml");
 		
-		//프로그램 실행 시 명령행 매개변수를 전달하면 바뀜
-		//Run as> Run Configuration > argument에 lg 또는 samsung 을 입력하고 Run해보자
-		
+		//2. Spring 컨테이너로부터 필요한 객체를 요청(Lookup)한다.
+		TV tv = (TV)factory.getBean("tv");
 		tv.powerOn();
 		tv.volumeUp();
 		tv.volumeDown();
 		tv.powerOff();
 		
+		//3. Spring 컨테이너를 종료한다.
+		factory.close();
 	}
 
 }
