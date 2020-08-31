@@ -18,6 +18,7 @@ public class BoardDAO  {
 	private ResultSet rs = null;
 	
 	private final String BOARD_INSERT = "insert into board(title, writer, content) values(?,?,?)";
+	//seq Ä®·³ autoincrement
 	private final String BOARD_UPDATE = "update board set title=?, content=? where seq=?";
 	private final String BOARD_DELETE = "delete board where seq=?";
 	private final String BOARD_GET = "select * from board where seq=?";
