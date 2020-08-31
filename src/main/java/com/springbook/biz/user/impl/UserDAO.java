@@ -4,10 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import org.springframework.stereotype.Repository;
+
 import com.springbook.biz.common.JDBCUtil;
 import com.springbook.biz.user.UserDTO;
 
-//<bean>등록으로 객체를 생성할 예정
+@Repository("userDAO")
 public class UserDAO  {
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;

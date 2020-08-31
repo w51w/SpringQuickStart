@@ -1,10 +1,14 @@
 package com.springbook.biz.user.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.springbook.biz.user.UserDTO;
 import com.springbook.biz.user.UserService;
 
-//<bean>으로 객체 생성 예정
+@Service("userService")
 public class UserServiceImpl implements UserService{
+	@Autowired
 	private UserDAO userDAO;
 
 	public void setUserDAO(UserDAO userDAO) {
