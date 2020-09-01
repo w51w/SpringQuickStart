@@ -3,6 +3,7 @@ package com.springbook.biz.board.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +20,8 @@ public class BoardDAO  {
 	
 	private final String BOARD_INSERT = "insert into board(title, writer, content) values(?,?,?)";
 	//seq 칼럼 autoincrement
-	private final String BOARD_UPDATE = "update board set title=?, content=? where seq=?";
-	private final String BOARD_DELETE = "delete board where seq=?";
+	private final String BOARD_UPDATE = "update from board set title=?, content=? where seq=?";
+	private final String BOARD_DELETE = "delete from board where seq=?";
 	private final String BOARD_GET = "select * from board where seq=?";
 	private final String BOARD_LIST = "select * from board order by seq desc";
 	
@@ -76,6 +77,7 @@ public class BoardDAO  {
 			JDBCUtil.close(pstmt, conn);
 		}
 	}
+	
 	//글 상세 조회
 	public BoardDTO getBoard(BoardDTO vo) {
 		System.out.println("===>JDBC로 getBoard() 기능 처리");
