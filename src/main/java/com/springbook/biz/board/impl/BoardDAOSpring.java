@@ -17,7 +17,7 @@ public class BoardDAOSpring{
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	private final String BOARD_INSERT = "insert into board(title, writer, content) values(?,?,?)";
+	private final String BOARD_INSERT = "insert into board(seq, title, writer, content) values(?,?,?,?)";
 	//seq 칼럼 autoincrement
 	private final String BOARD_UPDATE = "update from board set title=?, content=? where seq=?";
 	private final String BOARD_DELETE = "delete from board where seq=?";
@@ -27,7 +27,7 @@ public class BoardDAOSpring{
 	
 	public void insertBoard(BoardDTO vo) {
 		System.out.println("===>Spring JDBC로 insertBoard() 기능 처리");
-		jdbcTemplate.update(BOARD_INSERT, vo.getTitle(), vo.getWriter(), vo.getContent());
+		jdbcTemplate.update(BOARD_INSERT,vo.getSeq(), vo.getTitle(), vo.getWriter(), vo.getContent());
 	}
 	
 	public void updateBoard(BoardDTO vo) {

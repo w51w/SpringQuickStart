@@ -18,10 +18,11 @@ public class BoardServiceClient {
 		
 		BoardDTO vo = new BoardDTO();
 		
+		vo.setCnt(100);
 		vo.setTitle("임시 제목");
 		vo.setWriter("홍길동");
 		vo.setContent("임시 내용....");
-		boardService.insertBoard(vo);
+//		boardService.insertBoard(vo);
 
 		
 		List<BoardDTO> boardList = boardService.getBoardList(vo);
