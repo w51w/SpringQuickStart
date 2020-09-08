@@ -4,11 +4,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%
-	//1. 사용자 입력 정보 추출(검색 기능은 나중에)
-	//2. DB 연동 처리
-	BoardDTO vo = new BoardDTO();
-	BoardDAO boardDAO = new BoardDAO();
-	List<BoardDTO> boardList = boardDAO.getBoardList(vo);
+//세션에 저장된 글 목록을 꺼내서 출력하도록 수정
+	List<BoardDTO> boardList = (List) session.getAttribute("boardList");
 %> 
 <!DOCTYPE html>
 <html>
