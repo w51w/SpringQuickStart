@@ -1,5 +1,7 @@
 package com.springbook.view.user;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,12 +21,14 @@ public class LoginController  {
 	}
 	
 	@RequestMapping(value="/login.do", method = RequestMethod.POST)
-	public String login(UserDTO vo, UserDAO userDAO) {		
-		if(userDAO.getUser(vo) != null)
-			return "getBoardList.do";
-		else {
-			return "login.jsp";
+	public String login(UserDTO vo, UserDAO userDAO, HttpSession session) {	
+		UserDTO user = userDAO.getUser(vo);
+		if(user != null) {
+			session.setAttribute("userName", user.getName()); //세션에 저장된 사용자를 
+			return "getBoardList.do";	//getBoardist.jsp에 출력할 수 있게 한다.
 		}
+		else return "login.jsp";
+		
 	}
 	
 }
