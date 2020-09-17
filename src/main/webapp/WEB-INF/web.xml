@@ -2,7 +2,24 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xmlns="http://java.sun.com/xml/ns/javaee" 
 		xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
-		
+
+  <!--  src/main/resource 폴더에 위치한 스프링 설정파일을 읽어 들일 수  있게 한다. -->
+  <context-param>
+  	<param-name>contextConfigLocation</param-name>
+  	<param-value>classpath:applicationContext.xml</param-value>
+  </context-param>
+  
+  <!-- 기본적으로 /WEB-INF/applicationContext.xml 파일을 읽어들인다 -->
+  <!-- 비즈니스 컴포넌트들(ServiceImpl)을 메모리상에 등록을 먼저 시켜야 의존성 주입이 가능한데 이를 스프링에서 제공해줌 -->
+  <!-- 결국 컨트롤러보다 의존성 주입 대상이 되는 비즈니스 컴포넌트(ServiceImpl)를 먼저 생성하려면
+  		비즈니스 컴포넌트를 먼저 생성하는 또 다른 스프링 컨테이너가 필요 !
+  		그리고 이 컨테이너를 컨트롤러를 생성하는 컨테이너보다 먼저 구동하면 된다. ServiceImpl => Controller -->
+  <listener>
+  	<listener-class>
+  		org.springframework.web.context.ContextLoaderListener
+  	</listener-class>
+  </listener>
+  		
   <filter>
   	<filter-name>characterEncoding</filter-name>
   	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -17,6 +34,7 @@
   	<url-pattern>*.do</url-pattern>
   </filter-mapping>
   
+  <!-- 서블릿이 DispatcherServlet을 구동시켜 스프링 설정파일인 presentation-layer.xml을 읽어 스프링 컨테이너를 구동 -->
   <servlet>
     <servlet-name>action</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
