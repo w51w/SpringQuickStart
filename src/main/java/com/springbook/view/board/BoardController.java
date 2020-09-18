@@ -1,5 +1,8 @@
 package com.springbook.view.board;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +34,15 @@ public class BoardController {
 		boardService.deleteBoard(vo);
 		return "getBoardList.do";
 	}
+	
+	@ModelAttribute("conditionMap")
+	public Map<String, String> searchConditionMap(){
+		Map<String, String> conditionMap = new HashMap<String, String>();
+		conditionMap.put("제목", "TITLE");
+		conditionMap.put("내용", "CONTENT");
+		return conditionMap;
+	}
+	
 	@RequestMapping("/getBoard.do")
 	public String getBoard(BoardDTO vo , Model model) {
 		model.addAttribute("board", boardService.getBoard(vo));
@@ -38,6 +50,9 @@ public class BoardController {
 	}
 	@RequestMapping("/getBoardList.do")
 	public String getBoardList(BoardDTO vo , Model model) {
+		//null check , 로그인 성공 후 , 글 상세에서 글 목록으로 나올 때는 null인 상태이다.
+		if(vo.getSearchCondition() == null) vo.setSearchCondition("TITLE");
+		if(vo.getSearchKeyword() == null) vo.setSearchKeyword("");
 		model.addAttribute("boardList", boardService.getBoardList(vo));
 		return "getBoardList.jsp";
 	}
