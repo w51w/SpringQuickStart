@@ -1,5 +1,7 @@
 package com.springbook.view.board;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.springbook.biz.board.BoardDTO;
 import com.springbook.biz.board.BoardService;
@@ -20,7 +23,13 @@ public class BoardController {
 	private BoardService boardService;
 	
 	@RequestMapping("/insertBoard.do")
-	public String insertBoard(BoardDTO vo) {		
+	public String insertBoard(BoardDTO vo) throws IOException{		
+		//파일 업로드 처리
+		MultipartFile uploadFile = vo.getUploadFile();
+		if(!uploadFile.isEmpty()) {//파일이 있다면 아래 코드 실행
+			String fileName = uploadFile.getOriginalFilename();
+			uploadFile.transferTo(new File("D:/" + fileName));
+		}
 		boardService.insertBoard(vo);
 		return "getBoardList.do";
 	}
