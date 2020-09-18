@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.springbook.biz.board.BoardDTO;
+import com.springbook.biz.board.BoardListDTO;
 import com.springbook.biz.board.BoardService;
 
 @Controller
@@ -24,13 +25,23 @@ public class BoardController {
 	@Autowired//BoardService 타입의 BoardServiceImpl 객체가 의존성 주입된다.
 	private BoardService boardService;
 	
+//	@RequestMapping("/dataTransfrom.do")
+//	@ResponseBody //자바 객체를 Http 응답 프로토콜의 몸체로 변환하기 위해 사용된다.
+//	public List<BoardDTO> dataTransform(BoardDTO vo){
+//		vo.setSearchCondition("TITLE");
+//		vo.setSearchKeyword("");
+//		List<BoardDTO> boardlist = boardService.getBoardList(vo);
+//		return boardlist;
+//	}
 	@RequestMapping("/dataTransfrom.do")
 	@ResponseBody //자바 객체를 Http 응답 프로토콜의 몸체로 변환하기 위해 사용된다.
-	public List<BoardDTO> dataTransform(BoardDTO vo){
+	public BoardListDTO dataTransform(BoardDTO vo){
 		vo.setSearchCondition("TITLE");
 		vo.setSearchKeyword("");
-		List<BoardDTO> boardlist = boardService.getBoardList(vo);
-		return boardlist;
+		List<BoardDTO> boardList = boardService.getBoardList(vo);
+		BoardListDTO boardListDTO = new BoardListDTO();
+		boardListDTO.setBoardList(boardList);
+		return boardListDTO;
 	}
 	
 	@RequestMapping("/insertBoard.do")
