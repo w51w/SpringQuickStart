@@ -28,7 +28,7 @@ public class BoardController {
 		MultipartFile uploadFile = vo.getUploadFile();
 		if(!uploadFile.isEmpty()) {//파일이 있다면 아래 코드 실행
 			String fileName = uploadFile.getOriginalFilename();
-			uploadFile.transferTo(new File("D:/" + fileName));
+			uploadFile.transferTo(new File("C:\\Book_SpringQuickStart\\BoardWeb\\" + fileName));
 		}
 		boardService.insertBoard(vo);
 		return "getBoardList.do";
